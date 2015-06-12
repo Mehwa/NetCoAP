@@ -7,7 +7,7 @@
 #include <netinet/in.h>
 #include <pthread.h>
 
-
+//network
 /*		³×Æ®¿öÅ© ½Ç½À
 		¸ÖÆ¼ ¾²·¹µå¸¦ ÀÌ¿ëÇÑ Ã¤ÆÃ ÇÁ·Î±×·¥
 		ÀÛ¼ºÀÚ : À±¼º¿ì
