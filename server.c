@@ -1,3 +1,7 @@
+
+
+
+
 int main(){
 socket()
 bind()
