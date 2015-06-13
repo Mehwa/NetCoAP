@@ -33,3 +33,30 @@
 | 5.04 | Gateway Timeout              | [RFC7252] |
 | 5.05 | Proxying Not Supported       | [RFC7252] |
 +------+------------------------------+-----------+
+
+
+
+		   +--------+------------------+-----------+
+                 | Number | Name             | Reference |
+                 +--------+------------------+-----------+
+                 |      0 | (Reserved)       | [RFC7252] |
+                 |      1 | If-Match         | [RFC7252] |
+                 |      3 | Uri-Host         | [RFC7252] |
+                 |      4 | ETag             | [RFC7252] |
+                 |      5 | If-None-Match    | [RFC7252] |
+                 |      7 | Uri-Port         | [RFC7252] |
+                 |      8 | Location-Path    | [RFC7252] |
+                 |     11 | Uri-Path         | [RFC7252] |
+                 |     12 | Content-Format   | [RFC7252] |
+                 |     14 | Max-Age          | [RFC7252] |
+                 |     15 | Uri-Query        | [RFC7252] |
+                 |     17 | Accept           | [RFC7252] |
+                 |     20 | Location-Query   | [RFC7252] |
+                 |     35 | Proxy-Uri        | [RFC7252] |
+                 |     39 | Proxy-Scheme     | [RFC7252] |
+                 |     60 | Size1            | [RFC7252] |
+                 |    128 | (Reserved)       | [RFC7252] |
+                 |    132 | (Reserved)       | [RFC7252] |
+                 |    136 | (Reserved)       | [RFC7252] |
+                 |    140 | (Reserved)       | [RFC7252] |
+                 +--------+------------------+-----------+
