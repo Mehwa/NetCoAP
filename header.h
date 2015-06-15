@@ -44,7 +44,7 @@ void setOption(unsigned char* delta_length, int delta, int length);
 
 
 void makePacket(char* buf, Header* header, Option** option, char* payload, int paylen);
-
+/* paylen contains NULL */
 
 
 
@@ -103,7 +103,8 @@ int getTkl(unsigned char ver_t_tkl){
 	return ver_t_tkl >> 4;
 }
 void setTkl(unsigned char* ver_t_tkl, int Tkl){
-	if (Tkl >= 0 && Tkl <= 15){
+	if (Tkl == 0 || Tkl == 4){
+		/* Assume that token length is always 4(int) or zero(none) */
 		*ver_t_tkl >>= 4;
 		*ver_t_tkl <<= 4;
 		*ver_t_tkl += (unsigned char)Tkl;
@@ -191,4 +192,41 @@ void setOption(unsigned char* delta_length, int delta, int length){
 	setOptionDelta(delta_length, delta);
 	setOptionLength(delta_length, length);
 	return;
+}
+
+void makePacket(char* buf, Header* header, Option** option, char* payload, int paylen){
+	int len = 0;
+	int size;
+	int token; /* Assume int or zero*/
+	int i;
+
+	size = sizeof(Header);
+	memcpy(&buf[len], header, size);
+	len += size;
+
+	if (size = getTkl(header->ver_t_tkl)){
+		token = (int)time(NULL);
+		
+		memcpy(&buf[len], &token, size);
+		len += size;
+	}
+
+	size = sizeof(Option);
+	if (option != NULL){
+		i = 0;
+		while (option[i] != NULL){
+			memcpy(&buf[len], option[i], size);
+			len += size;
+			i++;
+		}
+	}
+	
+	if (payload != NULL){
+		size = 8;
+		memcpy(&buf[len], "11111111", size);
+		len += size;
+
+		memcpy(&buf[len], payload, paylen);
+	}
+
 }
