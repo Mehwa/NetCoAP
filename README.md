@@ -16,3 +16,5 @@ http://www.joinc.co.kr/modules/moniwiki/wiki.php/article/bit_%B4%DC%C0%A7_%BC%B1
 
 //6. 멀티 캐스트는 일단 보류? 유니캐스트만
 //7. 프록시도 보류
+
+8. 옵션에서 추가항목은 사용하지 않는 것으로 함.
