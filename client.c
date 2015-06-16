@@ -23,7 +23,7 @@ int main(int argc, char *argv[]){
 	/* packet */
 	int str_len;
 	char recvBuf[BUF_SIZE], sendBuf[BUF_SIZE];
-	OptionNode* recvOptionNode, *sendOptionNode, *curOptionNode;
+	
 	int recvToken, sendToken;
 	char* recvPayload, sendPayload[PAYLOAD_BUF_SIZE];
 	int recvPay_len, sendPay_len;
@@ -32,8 +32,8 @@ int main(int argc, char *argv[]){
 	int send_pkt_size;
 
 	/* coap Packet */
-	Header* recvHeader, *sendHeader;
-	OptionNode* recvOptionNode, *sendOptionNode, *curOptionNode;
+	Header* recvHeader = NULL, *sendHeader = NULL;
+	OptionNode* recvOptionNode =NULL, *sendOptionNode= NULL, *curOptionNode = NULL;
 
 	/* Header */
 	unsigned char ver_t_tkl = 0;
@@ -73,11 +73,15 @@ int main(int argc, char *argv[]){
 
 	send_pkt_size = makePacket(sendBuf, sendHeader, 0, sendOptionNode, NULL, 0);
 
-
 	adr_size = sizeof(struct sockaddr);
+	sendto(clnt_sock, sendBuf, send_pkt_size, 0, (struct sockaddr *)&serv_adr, adr_size);
+
+
+
+	
 	str_len = recvfrom(clnt_sock, recvBuf, BUF_SIZE, 0, (struct sockaddr *)&serv_adr, &adr_size);
 
-	plitPacket(recvBuf, str_len, recvHeader, &recvToken, recvOptionNode, recvPayload, &recvPay_len);
+	splitPacket(recvBuf, str_len, recvHeader, &recvToken, recvOptionNode, recvPayload, &recvPay_len);
 	printf("[Ver: %d] [T: %d] [Tkl: %d] [Code: %d.%02d] [MessageID: %d]\n"
 		, getVer(getVer_T_Tkl(recvHeader))
 		, getT(getVer_T_Tkl(recvHeader))
