@@ -420,9 +420,7 @@ Header* makeHeader(unsigned char ver_t_tkl, unsigned char code, unsigned short m
 	
 	Header* header;
 
-	if (header != NULL)
-		free(header);
-
+	
 	header = (Header *)malloc(sizeof(Header));
 	if (header == NULL){
 		puts("header malloc error!\n");
