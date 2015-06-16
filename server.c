@@ -29,8 +29,8 @@ int main(int argc, char* argv[]){
 
 
 	/* coap Packet*/
-	Header* recvHeader, *sendHeader;
-	OptionNode* recvOptionNode, *sendOptionNode, *curOptionNode;
+	Header* recvHeader = NULL, *sendHeader = NULL;
+	OptionNode* recvOptionNode = NULL, *sendOptionNode = NULL, *curOptionNode = NULL;
 	int recvToken, sendToken;
 	char* recvPayload, sendPayload[PAYLOAD_BUF_SIZE];
 	int recvPay_len, sendPay_len;
@@ -58,7 +58,7 @@ int main(int argc, char* argv[]){
 		exit(1);
 	}
 
-	if ((serv_adr = socket(PF_INET, SOCK_DGRAM, 0)) < 0)
+	if ((serv_sock = socket(PF_INET, SOCK_DGRAM, 0)) < 0)
 	{
 		perror("socket error");
 		exit(1);
