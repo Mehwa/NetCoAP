@@ -25,7 +25,7 @@ int main(int argc, char *argv[]){
 	char recvBuf[BUF_SIZE], sendBuf[BUF_SIZE];
 	
 	int recvToken, sendToken;
-	char* recvPayload, sendPayload[PAYLOAD_BUF_SIZE];
+	char* recvPayload = NULL, sendPayload[PAYLOAD_BUF_SIZE];
 	int recvPay_len, sendPay_len;
 	int curOptionOffset;	/* used with option delta */
 	int piggy;			/* Can server send piggyback? TRUE or False */
@@ -74,7 +74,20 @@ int main(int argc, char *argv[]){
 	send_pkt_size = makePacket(sendBuf, sendHeader, 0, sendOptionNode, NULL, 0);
 
 	adr_size = sizeof(struct sockaddr);
+	
+	
+	
 	sendto(clnt_sock, sendBuf, send_pkt_size, 0, (struct sockaddr *)&serv_adr, adr_size);
+
+	splitPacket(sendBuf, str_len, recvHeader, &recvToken, recvOptionNode, recvPayload, &recvPay_len);
+	printf("[Ver: %d] [T: %d] [Tkl: %d] [Code: %d.%02d] [MessageID: %d]\n"
+		, getVer(getVer_T_Tkl(recvHeader))
+		, getT(getVer_T_Tkl(recvHeader))
+		, getTkl(getVer_T_Tkl(recvHeader))
+		, getCodeClass(getCode(recvHeader))
+		, getCodeDetail(getCode(recvHeader))
+		, getMessageID(recvHeader));
+
 
 
 
